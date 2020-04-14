@@ -1,0 +1,57 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'com.chechetimes'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "http://192.168.1.251:8081/nexus/content/repositories/releases/" }
+    maven { url "http://192.168.1.251:8081/nexus/content/repositories/snapshots/" }
+    // 使用本地maven库
+    mavenLocal()
+    // 使用中央mav库
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'com.google.guava:guava:28.2-jre'
+    compile 'com.hankcs:hanlp:portable-1.7.7'
+    compile 'org.springframework.boot:spring-boot-starter:2.2.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc:2.2.6.RELEASE'
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.21'
+    compile 'mysql:mysql-connector-java:5.1.48'
+    compile 'com.monitorjbl:xlsx-streamer:2.1.0'
+    compile "org.apache.commons:commons-lang3:3.10"
+    compile "commons-beanutils:commons-beanutils:1.9.3"
+    compile 'commons-io:commons-io:2.6'
+    compile 'com.alibaba:fastjson:1.2.51'
+    //Mybatis-plus
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.0.7.1'
+    compile 'com.baomidou:dynamic-datasource-spring-boot-starter:2.5.0'
+    testCompile group: 'com.baomidou', name: 'mybatis-plus-generator', version: '3.0.7.1'
+    compile 'org.apache.velocity:velocity-engine-core:2.0'
+    // DB
+    compile 'mysql:mysql-connector-java:5.1.47',
+            'com.alibaba:druid-spring-boot-starter:1.1.10'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.2.6.RELEASE'
+}
+
+test {
+    useJUnitPlatform()
+}

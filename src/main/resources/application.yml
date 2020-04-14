@@ -1,0 +1,71 @@
+server:
+  port: 8899
+
+#spring
+spring:
+  devtools:
+    restart:
+      enabled: true
+  #druid
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    dynamic:
+      primary: das
+      druid:
+        initial-size: 2
+        max-active: 10
+        min-idle: 1
+        max-wait: 60000
+        test-on-borrow: false
+        test-on-return: false
+        test-while-idle: true
+        time-between-eviction-runs-millis: 30000
+        min-evictable-idle-time-millis: 60000
+        validation-query: SELECT 1
+        filters: wall,stat,slf4j,config
+        init-connection-sqls: set NAMES utf8mb4;
+      datasource:
+        das:
+          type: com.alibaba.druid.pool.DruidDataSource
+          username: test
+          password: test
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://117.78.39.116:18635/test?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=CTT
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  typeEnumsPackage: com.cheche365.das.**.entity.**.enums
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.cheche365.das.xxx
+    #逻辑删除配置（下面3个配置）
+    logic-delete-value: 1 #逻辑已删除
+    logic-not-delete-value: 0  #逻辑未删除
+    #自定义SQL注入器
+    #    sql-injector: com.cheche365.das.mapper.LogicSqlInjector
+    #自定义填充策略接口实现
+    #meta-object-handler: com.cheche365.das.xxx
+    # SQL 解析缓存，开启后多租户 @SqlParser 注解生效
+    sql-parser-cache: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    multipleResultSetsEnabled: true
+#logging
+logging:
+  level:
+    root: info
+    org:
+      flowable: debug
