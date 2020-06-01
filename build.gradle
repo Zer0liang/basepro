@@ -37,6 +37,9 @@ dependencies {
     compile "commons-beanutils:commons-beanutils:1.9.3"
     compile 'commons-io:commons-io:2.6'
     compile 'com.alibaba:fastjson:1.2.51'
+    //RocketMq
+    compile 'org.apache.rocketmq:rocketmq-client:4.3.0'
+
     //Mybatis-plus
     compile 'com.baomidou:mybatis-plus-boot-starter:3.0.7.1'
     compile 'com.baomidou:dynamic-datasource-spring-boot-starter:2.5.0'
