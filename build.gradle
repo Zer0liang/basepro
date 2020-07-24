@@ -20,12 +20,21 @@ repositories {
 }
 
 dependencies {
+    // 测试时需要groovy支持
+    compile 'org.codehaus.groovy:groovy-all:2.4.15'
+    // 使用spock时不使用内部groovy
+    testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+    testCompile("org.spockframework:spock-spring:1.1-groovy-2.4") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile 'com.google.guava:guava:28.2-jre'
     compile 'com.hankcs:hanlp:portable-1.7.7'
     compile 'org.springframework.boot:spring-boot-starter:2.2.6.RELEASE'

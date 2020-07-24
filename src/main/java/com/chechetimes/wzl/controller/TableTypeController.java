@@ -5,10 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.chechetimes.wzl.entity.TableType;
 import com.chechetimes.wzl.service.TableTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.groups.Default;
 
 /**
  * <p>
@@ -25,8 +27,8 @@ public class TableTypeController {
     @Autowired
     private TableTypeService tableTypeService;
 
-    @RequestMapping(value = "all")
-    public String allTableType() {
+    @PostMapping(value = "all")
+    public String allTableType(@RequestBody @Validated(Default.class) TableType tableType) {
         return JSONObject.toJSONString(tableTypeService.list());
     }
 

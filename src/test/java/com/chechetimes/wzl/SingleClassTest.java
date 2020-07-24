@@ -20,6 +20,9 @@ public class SingleClassTest {
         }
     }
 
+    /**
+     * 单例模式-懒汉
+     */
     static class LhanSingle {
         private static volatile LhanSingle lhanSingle = null;
 
