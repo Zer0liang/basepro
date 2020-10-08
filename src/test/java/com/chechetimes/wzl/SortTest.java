@@ -128,4 +128,79 @@ public class SortTest {
         System.out.println(erFenSearchIndex(integerList, 9, 0, integerList.size() - 1));
     }
 
+    @Test
+    public void testErFen() {
+        List<Integer> intList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+
+        int targetVal = 9;
+        int startIndex = 0;
+        int endIndex = intList.size() - 1;
+        boolean findSuccess = false;
+
+        while (startIndex <= endIndex) {
+            int midIndex = (startIndex + endIndex) >> 1;
+            int midVal = intList.get(midIndex);
+            if (midVal < targetVal) {
+                startIndex = midIndex + 1;
+            } else if (midVal > targetVal) {
+                endIndex = midIndex - 1;
+            } else {
+                findSuccess = true;
+                System.out.println("targetIndex:" + midIndex);
+                break;
+            }
+        }
+
+        if (!findSuccess) {
+            System.out.println("在当前集合中未发现指定元素");
+        }
+    }
+
+    @Test
+    public void testQuickSort() {
+        int[] arr = {4,1,8,5,3,2,9,10,6,7};
+        quickSort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void quickSort(int[] arr, int startIndex, int endIndex) {
+        int left = startIndex, right = endIndex;
+        int targetVal = arr[startIndex];
+
+        while (left < right) {
+            //从右向左遍历,如果比目标值小，则和目标元素交换位置
+            while (left < right) {
+                if (arr[right] < targetVal) {
+                    swapIndexVal(arr, left, right);
+                    break;
+                } else {
+                    right--;
+                }
+            }
+            //从左向右遍历，如果比目标值大，则和目标元素交换位置
+            while (left < right) {
+                if (arr[left] > targetVal) {
+                    swapIndexVal(arr, left, right);
+                    break;
+                } else {
+                    left++;
+                }
+            }
+        }
+
+        if (left - 1 > startIndex) {
+            quickSort(arr, startIndex, left - 1);
+        }
+
+        if ((right + 1) < endIndex) {
+            quickSort(arr, (right + 1), endIndex);
+        }
+    }
+
+    public void swapIndexVal(int[] arr, int sourceIndex, int targetIndex) {
+        int temp = arr[sourceIndex];
+        arr[sourceIndex] = arr[targetIndex];
+        arr[targetIndex] = temp;
+    }
+
 }
